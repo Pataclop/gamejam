@@ -24,4 +24,6 @@ func _process(delta):
 func _on_Ball_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton:
 		if event.is_pressed() and event.button_index == BUTTON_LEFT:
-			player._on_Target_is_clicked(self)
+			player._on_Target_is_clicked(self, true)
+		if event.is_pressed() and event.button_index == BUTTON_RIGHT:
+			player._on_Target_is_clicked(self, false)
