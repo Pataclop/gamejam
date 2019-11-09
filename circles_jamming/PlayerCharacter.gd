@@ -1,4 +1,4 @@
-extends StaticBody2D
+extends MovingElement
 
 # Declare member variables here. Examples:
 # var a = 2
@@ -8,7 +8,7 @@ var speed
 var t
 var length
 var clockwise
-	
+var baseAngularSpeed=PI/150
 
 func _ready():
 	t = 0
@@ -17,6 +17,14 @@ func _ready():
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	stepForward(1)
+	
+	
+	
+	
+
+func stepForward(gameSpeed:float):
+	var delta = baseAngularSpeed * gameSpeed
 	if typeof(target) == 17:
 		if clockwise:
 			t = t + delta/2
@@ -30,13 +38,15 @@ func _process(delta):
 	var sprite = get_node("Sprite")
 	sprite.position = position
 	
+	
 func _input(event):
 	
 	if event is InputEventMouseButton:
+		var changeMagnitude = 0.97
 		if event.button_index == BUTTON_WHEEL_UP:
-			length = length *1.03
+			length = length * (1/changeMagnitude)
 		if event.button_index == BUTTON_WHEEL_DOWN:
-			length = length *0.97
+			length = length * changeMagnitude
 
 
 func _on_Target_is_clicked(elementClicked, isClockwise):

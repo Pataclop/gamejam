@@ -8,9 +8,14 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "Node2D",
+"class": "MovingElement",
+"language": "GDScript",
+"path": "res://MovingElement.gd"
+} ]
 _global_script_class_icons={
-
+"MovingElement": ""
 }
 
 [application]
