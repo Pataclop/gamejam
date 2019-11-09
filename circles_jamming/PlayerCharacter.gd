@@ -9,9 +9,11 @@ var t
 var length
 var clockwise
 	
+var old_anchor = null
 
 func _ready():
 	t = 0
+	length = 0
 	clockwise = true
 	
 	
@@ -41,6 +43,19 @@ func _input(event):
 
 func _on_Target_is_clicked(elementClicked, isClockwise):
 	if typeof(elementClicked) == 17: #it's an anchor
+	
+		if(old_anchor == null):
+			old_anchor = elementClicked
+			
+		print(old_anchor, elementClicked)
+		
+		#old_color = Color(1,1,1)
+		#new_color = Color(1,1,1)
+		#elementClicked.color()
+		
+		
+		old_anchor = elementClicked
+		
 		clockwise = isClockwise
 		target = elementClicked
 		var targetPos = target.position

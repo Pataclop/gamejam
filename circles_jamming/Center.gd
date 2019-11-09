@@ -23,6 +23,7 @@ func _on_Timer_timeout():
 	new_ball.position = position
 	new_ball.direction = angle
 	new_ball.player = player
+	new_ball.angular_speed = (rng.randf()-0.5)/5
 	add_child(new_ball)
 	new_ball.connect("is_clicked",$PlayerCharacter,"_on_Target_is_clicked")
 
