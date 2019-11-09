@@ -8,7 +8,11 @@ var speed = 35
 var player
 var dist_to_center
 var centerPos
+
 var constant_linear_velocity
+
+var angular_speed
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -19,7 +23,12 @@ func _ready():
 func _process(delta):
 	position = position + Vector2(cos(direction)*delta*speed, sin(direction)*delta*speed)
 	dist_to_center = position-centerPos
-	
+	self.rotate(angular_speed)
+
+
+func color(ball_color):
+	self.modulate = ball_color
+	pass
 
 
 
