@@ -13,6 +13,8 @@ var angular_speed
 var color
 var anchor_variant
 
+signal is_clicked
+
 
 
 
@@ -37,7 +39,12 @@ func color(ball_color):
 
 func _on_Ball_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton:
-		if event.is_pressed() and event.button_index == BUTTON_LEFT:
-			player._on_Target_is_clicked(self, true)
-		if event.is_pressed() and event.button_index == BUTTON_RIGHT:
-			player._on_Target_is_clicked(self, false)
+		if(event.is_pressed()):
+			match event.button_index:
+				BUTTON_LEFT:
+					emit_signal("is_clicked",self,true)
+				BUTTON_RIGHT:
+					emit_signal("is_clicked",self,false)
+				_:
+					pass
+

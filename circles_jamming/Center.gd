@@ -14,6 +14,10 @@ enum anchor_variants {RED, GREEN, BLUE}
 
 	
 
+#constructor
+func _init():
+	pass
+	
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	var s = get_node("Sprite")
@@ -88,6 +92,6 @@ func _on_Timer_timeout():
 	
 	
 	add_child(new_ball)
-	new_ball.connect("is_clicked",$PlayerCharacter,"_on_Target_is_clicked")
+	new_ball.connect("is_clicked",player,"_on_Target_is_clicked")
 	speedControler.registerMovingElement(new_ball)
 

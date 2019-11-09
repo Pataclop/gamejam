@@ -9,7 +9,10 @@ var length
 var clockwise
 var attraction = 0.998
 
-var baseAngularSpeed=PI/400
+
+var doUseRightClic: bool = true
+
+var baseAngularSpeed=PI/300
 #var normalColor = Color(1,1,1)
 var selectedColor = Color(0.1, 0.1, 0.1)
 
@@ -18,8 +21,6 @@ func _ready():
 	t = 0
 	length = 0
 	clockwise = true
-	
-
 	
 	
 
@@ -50,17 +51,30 @@ func _input(event):
 
 func _on_Target_is_clicked(elementClicked, isClockwise):
 	if typeof(elementClicked) == 17: #it's an anchor
+		if(target == elementClicked):
+			return
 	
-		#print(elementClicked)
-				
-		if(target!=null):
+
+	
+		var hasATarget:bool = target!=null
+	
+	
+		if(hasATarget):
+			
+			if( ! doUseRightClic):
+				var vectorToTarget:Vector2 = target.position - self.position
+				var normalToTarget = Vector2(-vectorToTarget.y,vectorToTarget.x)
+				#//TODO retirer le clockwise (produit scalaire)
+				var vectorToNewTarget:Vector2 = elementClicked.position - self.position
+				isClockwise = normalToTarget.dot(vectorToNewTarget) > 0
+			
 			target.color(target.color)
-		elementClicked.color(selectedColor)
 		
 		clockwise = isClockwise
 		target = elementClicked
-		var targetPos = target.position
-		var pos = targetPos - target.dist_to_center/2
+		
+		target.color(selectedColor)
+		var pos = target.position - target.dist_to_center/2
 		length = sqrt(pow((pos[0] - position[0]),2) + pow((pos[1]-position[1]),2))
 		t = atan2(pos[1]-position[1], pos[0] - position[0]) + PI
 		#print(t)
