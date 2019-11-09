@@ -10,7 +10,7 @@ func _ready():
 	player.position = Vector2(0.05, 0.25) * OS.window_size
 	add_child(player)
 	
-	speedControler = GameSpeedControler.new()
+	speedControler = load("res://GameSpeedControler.gd").new()
 	speedControler.registerMovingElement(player)
 	
 	var pos = Vector2(0.25, 0.25)
