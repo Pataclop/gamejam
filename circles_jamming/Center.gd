@@ -65,33 +65,13 @@ func build_ball(new_ball):
 
 func _on_Timer_timeout():	
 
+
 	var new_ball = preload("res://Ball.tscn").instance()
-	
-
 	new_ball = build_ball(new_ball)
-	
-
-	
-	
-	# Choisir un élément selon l'enum
-	
-	#print(amount_variants)
-
-
-	
-	
-
-	
-	
-	# On a besoin de récupérer 1 fois ces données
-	#if(anchor_variants==null):
-		#anchor_variants = new_ball.anchor_variants.keys()
-	
-	# TODO typage de l'ancre
-	#new_ball.anchor_variant = get_variant()
-	
 	
 	add_child(new_ball)
 	new_ball.connect("is_clicked",player,"_on_Target_is_clicked")
 	speedControler.registerMovingElement(new_ball)
+	
+	print(len(get_children()))
 

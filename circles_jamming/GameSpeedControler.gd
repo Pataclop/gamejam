@@ -23,7 +23,6 @@ func step():
 func registerMovingElement(element:MovingElement):
 	movingElementArray.append(element);
 	
-	# //TODO
 	
 func _on_Anchor_is_clicked(elementClicked):
 	print("elem : ",typeof(elementClicked))

@@ -6,3 +6,12 @@
 [node name="Main" type="Node"]
 script = ExtResource( 1 )
 Ball = ExtResource( 2 )
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="External_barrier" type="Area2D" parent="Node2D"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Node2D/External_barrier"]
+build_mode = 1
+polygon = PoolVector2Array( 230, -70, 1030, -70, 1020, 700, -90, 700, -90, -20, -10, -20, -10, 650, 970, 650, 970, -10, -10, -10, -10, -20, -90, -20, -90, -70 )
+[connection signal="area_entered" from="Node2D/External_barrier" to="." method="_on_External_barrier_area_entered"]

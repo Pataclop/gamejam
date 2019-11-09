@@ -23,7 +23,7 @@ func _ready():
 	add_child(center)
 	
 	
-
+	
 	
 	pass
 	
@@ -34,7 +34,17 @@ func _ready():
 func _process(delta):
 	speedControler.step()
 	
+	
+	
+	
 func _input(event):
 	
 	if (event.is_action_released("ui_cancel")):
 		get_tree().quit()
+
+
+
+func _on_External_barrier_area_entered(area):
+	print(area) #TODO : il faut tuer l'objet lié à cette area
+
+	pass # Replace with function body.
