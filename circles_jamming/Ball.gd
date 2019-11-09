@@ -4,14 +4,14 @@ extends MovingElement
 # var a = 2
 # var b = "text"
 var direction
-var speed = 1
-var player
 var dist_to_center
 var centerPos
-var angular_speed
 
-var color
-var anchor_variant
+
+var speed = 0.8
+var angular_speed
+var color setget set_color
+var attraction = 0.998
 
 signal is_clicked
 
@@ -30,10 +30,15 @@ func stepForward(gameSpeed:float):
 	dist_to_center = position-centerPos
 	self.rotate(angular_speed)
 	
+func reset_color():
+	self.modulate = color
 
-func color(ball_color):
+func set_color(ball_color):
+	color = ball_color
 	self.modulate = ball_color
-	pass
+	
+func change_color(ball_color):
+	self.modulate = ball_color
 
 
 

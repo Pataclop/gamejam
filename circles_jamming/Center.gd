@@ -7,6 +7,7 @@ var rng = RandomNumberGenerator.new()
 var angle
 var player
 var speedControler#:GameSpeedControler
+var ballFactory
 
 	
 #TEST ENUM
@@ -22,11 +23,15 @@ func _init():
 func _ready():
 	var s = get_node("Sprite")
 	s.position = position
+	
 	var ptcles = get_node("Particles2D")
 	ptcles.position = position
 	var ptcles2 = get_node("Particles2D2")
 	ptcles2.position = position
 	
+
+	ballFactory = load("res://MovingObjectFactory.gd").new(position)
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
@@ -44,7 +49,6 @@ func build_ball(new_ball):
 	new_ball.anchor_variant = anchor_variant
 	new_ball.position = position
 	new_ball.direction = rng.randf_range(0.0, 6.3)
-	new_ball.player = player
 	new_ball.angular_speed = (rng.randf()-0.5)/5
 	
 	if(anchor_variant == anchor_variants.RED):
@@ -70,8 +74,29 @@ func build_ball(new_ball):
 func _on_Timer_timeout():	
 
 
-	var new_ball = preload("res://Ball.tscn").instance()
-	new_ball = build_ball(new_ball)
+
+	#new_ball = build_ball(new_ball)
+	var new_ball = ballFactory.get_random()
+
+	
+	
+	# Choisir un élément selon l'enum
+	
+	#print(amount_variants)
+
+
+	
+	
+
+	
+	
+	# On a besoin de récupérer 1 fois ces données
+	#if(anchor_variants==null):
+		#anchor_variants = new_ball.anchor_variants.keys()
+	
+	# TODO typage de l'ancre
+	#new_ball.anchor_variant = get_variant()
+	
 	
 	add_child(new_ball)
 	new_ball.connect("is_clicked",player,"_on_Target_is_clicked")
