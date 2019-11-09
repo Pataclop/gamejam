@@ -7,6 +7,7 @@ var target = null
 var t
 var length
 var clockwise
+var attraction = 0.998
 
 var baseAngularSpeed=PI/400
 #var normalColor = Color(1,1,1)
@@ -29,10 +30,10 @@ func stepForward(gameSpeed:float):
 			t = t + delta
 		else:
 			t = t - delta
-		
+		length=length*(1-(1-attraction)*gameSpeed)
 		var pos = target.position - target.dist_to_center/2#//TODO wtf ???
 		position = Vector2(pos[0]+cos(t) *  length, pos[1]+sin(t)*length)
-	
+		
 	var sprite = get_node("Sprite")
 	sprite.position = position
 	
