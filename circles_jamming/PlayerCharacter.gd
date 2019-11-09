@@ -22,10 +22,20 @@ func _process(delta):
 	var sprite = get_node("Sprite")
 	sprite.position = position
 	
+func _input(event):
+	
+	if event is InputEventMouseButton:
+		print("test")
+		if event.button_index == BUTTON_WHEEL_UP:
+			length = length *1.03
+		if event.button_index == BUTTON_WHEEL_DOWN:
+			length = length *0.97
+		
+
+
 func _on_Target_is_clicked(elementClicked):
 	if typeof(elementClicked) == 17: #it's an anchor
 		target = elementClicked
 		var targetPos = target.position
 		var pos = targetPos - target.dist_to_center/2
 		length = sqrt(pow((targetPos[0] - position[0]),2) + pow((targetPos[1]-position[1]),2))
-	pass
