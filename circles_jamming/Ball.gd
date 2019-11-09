@@ -4,7 +4,7 @@ extends MovingElement
 # var a = 2
 # var b = "text"
 var direction
-var speed = 0.8 * 10
+var speed = 1
 var player
 var dist_to_center
 var centerPos

@@ -6,7 +6,7 @@ extends Line2D
 var point
 var pos = Vector2(0.25, 0.25)
 var center = pos * OS.window_size
-var trailLength = 1000
+var trailLength = 200
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.

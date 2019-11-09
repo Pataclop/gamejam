@@ -7,7 +7,7 @@ var target = null
 var t
 var length
 var clockwise
-var attraction = 0.998
+var attraction = 0.995
 
 
 var doUseRightClic: bool = true

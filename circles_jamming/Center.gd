@@ -22,7 +22,11 @@ func _init():
 func _ready():
 	var s = get_node("Sprite")
 	s.position = position
-
+	var ptcles = get_node("Particles2D")
+	ptcles.position = position
+	var ptcles2 = get_node("Particles2D2")
+	ptcles2.position = position
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
