@@ -46,12 +46,14 @@ func _on_Target_is_clicked(elementClicked, isClockwise):
 	
 		if(old_anchor == null):
 			old_anchor = elementClicked
-			
+		
 		print(old_anchor, elementClicked)
 		
-		#old_color = Color(1,1,1)
-		#new_color = Color(1,1,1)
-		#elementClicked.color()
+		var old_color = Color(1,1,1)
+		var new_color = Color(0,0,0)
+		
+		old_anchor.color(old_color)
+		elementClicked.color(new_color)
 		
 		
 		old_anchor = elementClicked
