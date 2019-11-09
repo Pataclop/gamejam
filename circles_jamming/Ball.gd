@@ -11,12 +11,12 @@ var centerPos
 var angular_speed
 
 enum anchor_variants {RED, GREEN, BLUE}
-var anchor_type
+var anchor_variant
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	centerPos = position
-	print(anchor_type)
+	print(anchor_variant)
 
 
 func stepForward(gameSpeed:float):

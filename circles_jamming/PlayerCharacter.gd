@@ -50,17 +50,11 @@ func _input(event):
 func _on_Target_is_clicked(elementClicked, isClockwise):
 	if typeof(elementClicked) == 17: #it's an anchor
 	
-		
-		
-		print(elementClicked)
-		
-		
-		
+		#print(elementClicked)
+				
 		if(target!=null):
 			target.color(normalColor)
 		elementClicked.color(selectedColor)
-		
-		
 		
 		clockwise = isClockwise
 		target = elementClicked
@@ -68,4 +62,4 @@ func _on_Target_is_clicked(elementClicked, isClockwise):
 		var pos = targetPos - target.dist_to_center/2
 		length = sqrt(pow((pos[0] - position[0]),2) + pow((pos[1]-position[1]),2))
 		t = atan2(pos[1]-position[1], pos[0] - position[0]) + PI
-		print(t)
+		#print(t)
