@@ -5,11 +5,14 @@ extends StaticBody2D
 # var b = "text"
 var target
 var speed
-var t = 0
+var t
 var length
 	
 
-
+func _ready():
+	t = 0
+	
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if typeof(target) == 17:
@@ -25,7 +28,6 @@ func _process(delta):
 func _input(event):
 	
 	if event is InputEventMouseButton:
-		print("test")
 		if event.button_index == BUTTON_WHEEL_UP:
 			length = length *1.03
 		if event.button_index == BUTTON_WHEEL_DOWN:
@@ -38,4 +40,6 @@ func _on_Target_is_clicked(elementClicked):
 		target = elementClicked
 		var targetPos = target.position
 		var pos = targetPos - target.dist_to_center/2
-		length = sqrt(pow((targetPos[0] - position[0]),2) + pow((targetPos[1]-position[1]),2))
+		length = sqrt(pow((pos[0] - position[0]),2) + pow((pos[1]-position[1]),2))
+		t = atan2(pos[1]-position[1], pos[0] - position[0]) + PI
+		print(t)
