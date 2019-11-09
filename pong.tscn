@@ -1,0 +1,113 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://paddle.gd" type="Script" id=1]
+[ext_resource path="res://a.png" type="Texture" id=2]
+[ext_resource path="res://ball.png" type="Texture" id=3]
+[ext_resource path="res://Ball.tscn" type="PackedScene" id=4]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Node2D
+var radius = 100
+func _draw():
+	draw_circle_arc(Vector2(radius,radius), radius, 0, 360, Color(1.0, 1.0, 1.0))
+	
+func draw_circle_arc(center, radius, angle_from, angle_to, color):
+    var nb_points = 32
+    var points_arc = PoolVector2Array()
+
+    for i in range(nb_points + 1):
+        var angle_point = deg2rad(angle_from + i * (angle_to-angle_from) / nb_points - 90)
+        points_arc.push_back(center + Vector2(cos(angle_point), sin(angle_point)) * radius)
+
+    for index_point in range(nb_points):
+        draw_line(points_arc[index_point], points_arc[index_point + 1], color)
+
+func _process(delta):
+	#width = get_viewport_rect().size[0]
+	#heigth = get_viewport_rect().size[1]
+	#radius = width/15
+	var which = get_name()
+	#position.x = centerPosX+radius*cos(angle)
+	#position.y = centerPosY+radius*sin(angle)
+	#angle +=0.03
+	update()"
+
+[sub_resource type="CircleShape2D" id=2]
+
+[sub_resource type="GDScript" id=3]
+script/source = "extends Area2D
+
+
+const BALL_SPEED = 100
+var direction = Vector2(-1, 0)
+var speed = BALL_SPEED
+
+onready var initial_pos = self.position
+
+func reset():
+	position = initial_pos
+	speed = BALL_SPEED
+	direction = Vector2(-1, 0)
+
+func create():
+	var scene = load(\"res://Ball.tscn\") # Will load when the script is instanced.
+
+	
+func _process(delta):
+	var width = get_viewport_rect().size[0]
+	var heigth = get_viewport_rect().size[1]
+	position.x = width/2
+	position.y = heigth/2
+	
+	create()	
+
+	
+	
+"
+
+[sub_resource type="ImageTexture" id=4]
+
+[sub_resource type="GDScript" id=5]
+script/source = "extends RigidBody2D
+
+# Declare member variables here. Examples:
+# var a = 2
+# var b = \"text\"
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+#func _process(delta):
+#	pass
+"
+
+[node name="game" type="Node2D"]
+script = SubResource( 1 )
+
+[node name="left" type="Area2D" parent="."]
+position = Vector2( 67.6285, 192.594 )
+script = ExtResource( 1 )
+
+[node name="sprite" type="Sprite" parent="left"]
+scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 2 )
+
+[node name="collision" type="CollisionShape2D" parent="left"]
+shape = SubResource( 2 )
+
+[node name="ball" type="Area2D" parent="."]
+position = Vector2( 148.922, 124.468 )
+scale = Vector2( 10, 10 )
+collision_layer = 0
+collision_mask = 0
+script = SubResource( 3 )
+
+[node name="sprite" type="Sprite" parent="ball"]
+texture = ExtResource( 3 )
+normal_map = SubResource( 4 )
+
+[node name="Ball" parent="." instance=ExtResource( 4 )]
+script = SubResource( 5 )
+[connection signal="area_entered" from="left" to="left" method="_on_area_entered"]
