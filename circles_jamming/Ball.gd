@@ -10,17 +10,20 @@ var dist_to_center
 var centerPos
 var angular_speed
 
-enum anchor_variants {RED, GREEN, BLUE}
+var color
 var anchor_variant
+
+
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	centerPos = position
-	print(anchor_variant)
+	#apply_variant(anchor_variant)# TODO typage de l'ancre
+	
 
 
 func stepForward(gameSpeed:float):
-	
 	position = position + Vector2(cos(direction)*gameSpeed*speed, sin(direction)*gameSpeed*speed)
 	dist_to_center = position-centerPos
 	self.rotate(angular_speed)

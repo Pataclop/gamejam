@@ -5,6 +5,8 @@ export (PackedScene) var Ball
 var player
 var speedControler
 
+
+
 func _ready():
 	player = preload("res://PlayerCharacter.tscn").instance()
 	player.position = Vector2(0.05, 0.25) * OS.window_size
@@ -19,6 +21,14 @@ func _ready():
 	center.player = player
 	center.speedControler = speedControler
 	add_child(center)
+	
+	
+
+	
+	pass
+	
+	
+	
 	
 	
 func _process(delta):

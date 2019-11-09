@@ -8,7 +8,11 @@ var angle
 var player
 var speedControler#:GameSpeedControler
 
-var anchor_variants = null
+	
+#TEST ENUM
+enum anchor_variants {RED, GREEN, BLUE}
+
+	
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -19,24 +23,68 @@ func _ready():
 #func _process(delta):
 #	pass
 
-func get_variant():
-	var variant_key = rng.randi_range(0, len(anchor_variants)-1)
-	return anchor_variants[variant_key]
-	
 
-func _on_Timer_timeout():	
-	angle = rng.randf_range(0.0, 6.3)
-	var new_ball = preload("res://Ball.tscn").instance()
+func get_variant():
+	var amount_variants = len(anchor_variants)
+	return rng.randi_range(0, amount_variants-1)
+
+
+func build_ball(new_ball):
+	
+	var anchor_variant = get_variant()
+	
+	new_ball.anchor_variant = anchor_variant
 	new_ball.position = position
-	new_ball.direction = angle
+	new_ball.direction = rng.randf_range(0.0, 6.3)
 	new_ball.player = player
 	new_ball.angular_speed = (rng.randf()-0.5)/5
 	
-	# On a besoin de récupérer 1 fois ces données
-	if(anchor_variants==null):
-		anchor_variants = new_ball.anchor_variants.keys()
+	if(anchor_variant == anchor_variants.RED):
+		new_ball.color = Color(1, 0, 0)
+		pass
+		
+	if(anchor_variant == anchor_variants.GREEN):
+		new_ball.color = Color(0, 1, 0)
+		pass
+		
+	if(anchor_variant == anchor_variants.BLUE):
+		new_ball.color = Color(0, 0, 1)
+		pass
+		
+	else:
+		pass
 	
-	new_ball.anchor_variant = get_variant()
+	new_ball.modulate = new_ball.color
+	
+	return new_ball
+	
+
+func _on_Timer_timeout():	
+
+	var new_ball = preload("res://Ball.tscn").instance()
+	
+
+	new_ball = build_ball(new_ball)
+	
+
+	
+	
+	# Choisir un élément selon l'enum
+	
+	#print(amount_variants)
+
+
+	
+	
+
+	
+	
+	# On a besoin de récupérer 1 fois ces données
+	#if(anchor_variants==null):
+		#anchor_variants = new_ball.anchor_variants.keys()
+	
+	# TODO typage de l'ancre
+	#new_ball.anchor_variant = get_variant()
 	
 	
 	add_child(new_ball)

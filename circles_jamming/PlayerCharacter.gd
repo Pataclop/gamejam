@@ -9,8 +9,8 @@ var length
 var clockwise
 
 var baseAngularSpeed=PI/400
-var normalColor = Color(1,1,1)
-var selectedColor = Color(0,0,0)
+#var normalColor = Color(1,1,1)
+var selectedColor = Color(0.1, 0.1, 0.1)
 
 
 func _ready():
@@ -53,7 +53,7 @@ func _on_Target_is_clicked(elementClicked, isClockwise):
 		#print(elementClicked)
 				
 		if(target!=null):
-			target.color(normalColor)
+			target.color(target.color)
 		elementClicked.color(selectedColor)
 		
 		clockwise = isClockwise
