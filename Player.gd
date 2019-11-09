@@ -1,16 +1,21 @@
-extends Area2D
+extends MovingElement
 
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
-var rootAnchor
+var rootAnchor = self.owner
+
+var basseRotationAmount = PI/150
+var baseRopeDecay = 0.99
 
 """
 rotationAmount : angle in rad travelled during this step
 ropeDecay : [0.0,1.0] the amount of the rope lost 
 	relative to the total length (0 means no decay)
 """
-func stepForward(rotationAmount:float,ropeDecay:float):
+func stepForward(gameSpeed:float):
+	var rotationAmount = basseRotationAmount * gameSpeed
+	var ropeDecay = baseRopeDecay * gameSpeed
 	
 	position.x -= rootAnchor.x
 	position.y -= rootAnchor.y
