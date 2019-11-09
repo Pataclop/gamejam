@@ -4,12 +4,11 @@ extends MovingElement
 # var a = 2
 # var b = "text"
 var target = null
-var speed
 var t
 var length
 var clockwise
 
-var baseAngularSpeed=PI/150
+var baseAngularSpeed=PI/400
 var normalColor = Color(1,1,1)
 var selectedColor = Color(0,0,0)
 
@@ -19,12 +18,7 @@ func _ready():
 	length = 0
 	clockwise = true
 	
-	
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	stepForward(1)
-	
-	
+
 	
 	
 
@@ -32,12 +26,11 @@ func stepForward(gameSpeed:float):
 	var delta = baseAngularSpeed * gameSpeed
 	if typeof(target) == 17:
 		if clockwise:
-			t = t + delta/2
+			t = t + delta
 		else:
-			t = t - delta/2
-		speed = target.speed
-		var targetPos = target.position
-		var pos = targetPos - target.dist_to_center/2#//TODO wtf ???
+			t = t - delta
+		
+		var pos = target.position - target.dist_to_center/2#//TODO wtf ???
 		position = Vector2(pos[0]+cos(t) *  length, pos[1]+sin(t)*length)
 	
 	var sprite = get_node("Sprite")

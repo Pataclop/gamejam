@@ -6,6 +6,7 @@ extends Node2D
 var rng = RandomNumberGenerator.new()
 var angle
 var player
+var speedControler:GameSpeedControler
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -26,4 +27,5 @@ func _on_Timer_timeout():
 	new_ball.angular_speed = (rng.randf()-0.5)/5
 	add_child(new_ball)
 	new_ball.connect("is_clicked",$PlayerCharacter,"_on_Target_is_clicked")
+	speedControler.registerMovingElement(new_ball)
 

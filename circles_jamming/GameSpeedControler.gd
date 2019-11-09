@@ -1,9 +1,12 @@
 extends Node
 
+class_name GameSpeedControler
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
 var gameSpeed:float = 1.0
+
+var movingElementArray:Array
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -14,10 +17,12 @@ func _ready():
 #	pass
 func step():
 	pass
+	for elem in movingElementArray:
+		elem.stepForward(gameSpeed)
 	
 func registerMovingElement(element:MovingElement):
+	movingElementArray.append(element);
 	
-	element.stepForward(gameSpeed)
 	# //TODO
 	
 func _on_Anchor_is_clicked(elementClicked):
