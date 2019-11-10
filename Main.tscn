@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Main.gd" type="Script" id=1]
+[ext_resource path="res://Ball.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/BG_smooth.png" type="Texture" id=3]
+[ext_resource path="res://assets/darkCenter.png" type="Texture" id=4]
+[ext_resource path="res://External_barrier.gd" type="Script" id=5]
+
+[node name="Main" type="Node"]
+script = ExtResource( 1 )
+Ball = ExtResource( 2 )
+
+[node name="background" type="Sprite" parent="."]
+position = Vector2( 480, 480 )
+scale = Vector2( 0.8, 0.8 )
+z_index = -6
+texture = ExtResource( 3 )
+
+[node name="black_blur" type="Sprite" parent="."]
+position = Vector2( 480, 480 )
+scale = Vector2( 0.3, 0.3 )
+z_index = -5
+texture = ExtResource( 4 )
+
+[node name="External_barrier" type="Area2D" parent="."]
+script = ExtResource( 5 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="External_barrier"]
+build_mode = 1
+polygon = PoolVector2Array( 230, -70, 1030, -70, 1050, 1050, -130, 1070, -110, -30, -90, -40, -40, -40, -40, 1010, 1000, 1000, 1000, -30, -30, -40, -100, -40, -120, -60, -90, -70 )
+[connection signal="area_entered" from="External_barrier" to="External_barrier" method="_on_External_barrier_area_entered"]
