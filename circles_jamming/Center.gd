@@ -8,6 +8,8 @@ var angle
 var player
 var speedControler#:GameSpeedControler
 var ballFactory
+var collectiblesFactory
+var collectiblesCount = 0
 
 var doesPlayerTargetNeedToBeDeleted = false
 
@@ -33,6 +35,7 @@ func _ready():
 	
 
 	ballFactory = load("res://MovingObjectFactory.gd").new(position)
+	collectiblesFactory = load("res://CollectibleFactory.gd").new(position)
 	
 	
 	player.connect("targetChanged",self,"_on_Player_target_change")
@@ -77,31 +80,13 @@ func build_ball(new_ball):
 	
 
 func _on_Timer_timeout():	
-
-
-
+	collectiblesCount += 1
+	if collectiblesCount % 4 ==0:
+		var new_collectible = collectiblesFactory.get_random()
+		add_child(new_collectible)
+		speedControler.registerMovingElement(new_collectible)
 	#new_ball = build_ball(new_ball)
 	var new_ball = ballFactory.get_random()
-
-	
-	
-	# Choisir un élément selon l'enum
-	
-	#print(amount_variants)
-
-
-	
-	
-
-	
-	
-	# On a besoin de récupérer 1 fois ces données
-	#if(anchor_variants==null):
-		#anchor_variants = new_ball.anchor_variants.keys()
-	
-	# TODO typage de l'ancre
-	#new_ball.anchor_variant = get_variant()
-	
 	
 	add_child(new_ball)
 	new_ball.connect("is_clicked",player,"_on_Target_is_clicked")

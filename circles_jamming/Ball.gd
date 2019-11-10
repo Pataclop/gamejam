@@ -28,7 +28,8 @@ func _ready():
 func stepForward(gameSpeed:float):
 	position = position + Vector2(cos(direction)*gameSpeed*speed, sin(direction)*gameSpeed*speed)
 	dist_to_center = position-centerPos
-	self.rotate(angular_speed)
+	if angular_speed != null:
+		self.rotate(angular_speed)
 	
 func reset_color():
 	self.modulate = color
