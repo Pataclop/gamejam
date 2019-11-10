@@ -28,9 +28,9 @@ func _ready():
 	var s = get_node("Sprite")
 	s.position = position
 	
-	var ptcles = get_node("Particles2D")
+	var ptcles = get_node("Particles2D_violettes")
 	ptcles.position = position
-	var ptcles2 = get_node("Particles2D2")
+	var ptcles2 = get_node("Particles2D_noires")
 	ptcles2.position = position
 	
 

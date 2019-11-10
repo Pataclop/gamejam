@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/atom.png-656682d98931876fd045a1d804bf1045.stex"
+path="res://.import/darkCenter.png-7d0a1c3b38922f8bdfe7f97475d4e632.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://atom.png"
-dest_files=[ "res://.import/atom.png-656682d98931876fd045a1d804bf1045.stex" ]
+source_file="res://assets/darkCenter.png"
+dest_files=[ "res://.import/darkCenter.png-7d0a1c3b38922f8bdfe7f97475d4e632.stex" ]
 
 [params]
 
