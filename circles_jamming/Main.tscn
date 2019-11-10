@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Main.gd" type="Script" id=1]
 [ext_resource path="res://Ball.tscn" type="PackedScene" id=2]
+[ext_resource path="res://External_barrier.gd" type="Script" id=3]
 
 [node name="Main" type="Node"]
 script = ExtResource( 1 )
@@ -9,9 +10,10 @@ Ball = ExtResource( 2 )
 
 [node name="Node2D" type="Node2D" parent="."]
 
-[node name="External_barrier" type="Area2D" parent="Node2D"]
+[node name="External_barrier" type="Area2D" parent="."]
+script = ExtResource( 3 )
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Node2D/External_barrier"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="External_barrier"]
 build_mode = 1
 polygon = PoolVector2Array( 230, -70, 1030, -70, 1020, 700, -90, 700, -90, -20, -10, -20, -10, 650, 970, 650, 970, -10, -10, -10, -10, -20, -90, -20, -90, -70 )
-[connection signal="area_entered" from="Node2D/External_barrier" to="." method="_on_External_barrier_area_entered"]
+[connection signal="area_entered" from="External_barrier" to="External_barrier" method="_on_External_barrier_area_entered"]

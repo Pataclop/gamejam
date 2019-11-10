@@ -22,10 +22,9 @@ func _ready():
 	center.speedControler = speedControler
 	add_child(center)
 	
+	$External_barrier.connect("collide", center, "_on_External_barrier_collide")
 	
 	
-	
-	pass
 	
 	
 	
@@ -44,7 +43,4 @@ func _input(event):
 
 
 
-func _on_External_barrier_area_entered(area):
-	print(area) #TODO : il faut tuer l'objet lié à cette area
 
-	pass # Replace with function body.

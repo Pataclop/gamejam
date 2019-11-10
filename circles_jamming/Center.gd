@@ -9,6 +9,8 @@ var player
 var speedControler#:GameSpeedControler
 var ballFactory
 
+var doesPlayerTargetNeedToBeDeleted = false
+
 	
 #TEST ENUM
 enum anchor_variants {RED, GREEN, BLUE}
@@ -31,6 +33,9 @@ func _ready():
 	
 
 	ballFactory = load("res://MovingObjectFactory.gd").new(position)
+	
+	
+	player.connect("targetChanged",self,"_on_Player_target_change")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
@@ -102,5 +107,31 @@ func _on_Timer_timeout():
 	new_ball.connect("is_clicked",player,"_on_Target_is_clicked")
 	speedControler.registerMovingElement(new_ball)
 	
-	print(len(get_children()))
+	#print(len(get_children()))
+	
+func _on_Player_target_change(oldTarget,newTarget):
+	if(doesPlayerTargetNeedToBeDeleted):
+		doesPlayerTargetNeedToBeDeleted = false
+		oldTarget.queue_free()
+	
+func _on_External_barrier_collide(area):
+	
+	var isBall:bool = false
+	for ball in self.get_children():
+		if (ball == area):
+			isBall=true
+			print("ball !")
+			#speedControler.unregisterMovingElement(ball)
+			if(player.hasATarget() && player.target.get_ref() == ball):
+				doesPlayerTargetNeedToBeDeleted = true
+			else:
+				ball.queue_free()
+			
+			#self.remove_child(ball)
+			# ball.queue_free() #we can't use that because the player save a ball
+	if(! isBall):
+		print("aww, no ball")
+	pass # Replace with function body.
+
+
 
