@@ -5,16 +5,18 @@ extends MovingElement
 # var b = "text"
 var target:MovingElement = null
 var hasATarget:bool = false
-
+var isClicked = false
 var t
 var length
 var clockwise
-
+var timeSinceClicked =0
 
 
 var doUseRightClic: bool = true #alternate control sheme
 
 const baseAngularSpeed=PI/300
+var clickSpeed = 0
+var speed = baseAngularSpeed
 #var normalColor = Color(1,1,1)
 const selectedColor = Color(0.1, 0.1, 0.1)
 
@@ -37,12 +39,17 @@ func _ready():
 	
 
 func stepForward(gameSpeed:float):
-	var delta = baseAngularSpeed * gameSpeed
+	speed = baseAngularSpeed+clickSpeed
+	if isClicked :
+		clickSpeed=clickSpeed*1.02
+	else :
+		clickSpeed = clickSpeed*0.90
+	var delta = speed * gameSpeed
 	if typeof(target) == 17:
 		if clockwise:
-			t = t + delta
+			t = t + delta 
 		else:
-			t = t - delta
+			t = t - delta 
 		length=length*(1-(1-target.attraction)*gameSpeed)
 		var pos = target.position - target.dist_to_center/2#//TODO wtf ???
 		position = Vector2(pos[0]+cos(t) *  length, pos[1]+sin(t)*length)
@@ -60,7 +67,16 @@ func _input(event):
 			length = length * (1/changeMagnitude)
 		if event.button_index == BUTTON_WHEEL_DOWN:
 			length = length * changeMagnitude
-
+		if event.button_index == BUTTON_LEFT and event.pressed:
+			clickSpeed=baseAngularSpeed
+			isClicked = true
+		if event.button_index == BUTTON_LEFT and event.pressed==false:
+			isClicked=false
+		if event.button_index == BUTTON_RIGHT and event.pressed:
+			clickSpeed=baseAngularSpeed
+			isClicked=true
+		if event.button_index == BUTTON_RIGHT and event.pressed==false:
+			isClicked = false
 
 func _on_Target_is_clicked(elementClicked, isClockwise):
 	if typeof(elementClicked) == 17: #it's an anchor
@@ -90,3 +106,5 @@ func _on_Target_is_clicked(elementClicked, isClockwise):
 		length = sqrt(pow((pos[0] - position[0]),2) + pow((pos[1]-position[1]),2))
 		t = atan2(pos[1]-position[1], pos[0] - position[0]) + PI
 		#print(t)
+	
+		
