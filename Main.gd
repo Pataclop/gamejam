@@ -12,7 +12,7 @@ var background_rotation = 0.001
 
 func _ready():
 	var windowSize = get_viewport().get_visible_rect().size
-	get_viewport().
+	
 	
 	player = load("res://PlayerCharacter.tscn").instance()
 	player.position = windowSize/4
