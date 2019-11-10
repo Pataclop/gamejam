@@ -8,39 +8,16 @@
 
 config_version=4
 
-_global_script_classes=[ {
-"base": "Node",
-"class": "GameSpeedControler",
-"language": "GDScript",
-"path": "res://GameSpeedControler.gd"
-}, {
-"base": "Node2D",
-"class": "MovingElement",
-"language": "GDScript",
-"path": "res://MovingElement.gd"
-}, {
-"base": "MovingElement",
-"class": "ParticleScript",
-"language": "GDScript",
-"path": "res://ParticleScript.gd"
-}, {
-"base": "MovingElement",
-"class": "TimerScript",
-"language": "GDScript",
-"path": "res://TimerScript.gd"
-} ]
+_global_script_classes=[  ]
 _global_script_class_icons={
-"GameSpeedControler": "",
-"MovingElement": "",
-"ParticleScript": "",
-"TimerScript": ""
+
 }
 
 [application]
 
 config/name="Cyclotron"
 run/main_scene="res://Main.tscn"
-config/icon="res://assets/atom.png"
+config/icon="res://icon.png"
 
 [display]
 
@@ -73,16 +50,6 @@ texture={
 click={
 "deadzone": 0.5,
 "events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
- ]
-}
-ui_restart={
-"deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":82,"unicode":0,"echo":false,"script":null)
- ]
-}
-ui_pause={
-"deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":80,"unicode":0,"echo":false,"script":null)
  ]
 }
 

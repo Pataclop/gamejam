@@ -7,7 +7,7 @@ var speedControler
 
 var isGameOver:bool = false
 var gameOverSpeedMultiplier = 1
-var speed_rotation = 0.001
+var background_rotation = 0.001
 
 
 func _ready():
@@ -38,11 +38,11 @@ func _ready():
 func _process(delta):
 	
 	
-	get_node("background").rotate(speed_rotation)
+	get_node("background").rotate(background_rotation)
 	
 	
 	if(isGameOver):
-		speed_rotation *= 0.95
+		background_rotation *= 0.95
 		gameOverSpeedMultiplier *= 0.995
 		speedControler.gameSpeed *= gameOverSpeedMultiplier
 	
