@@ -18,14 +18,13 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	point=global_position
-	
-
 	add_point(point)
+	
+	# Supprimer les 2 points random qui créent un début de trail
 	init_counter = init_counter + 1
-	print(init_counter)
-		
-		
-		
+	#print(init_counter)
+	if(init_counter < 2):
+		remove_point(0)
 	
 	var cmp = get_point_count ()
 	
