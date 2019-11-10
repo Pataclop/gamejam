@@ -8,7 +8,7 @@ var dist_to_center
 var centerPos
 
 
-var speed = 0.8
+var speed = 0.4
 var angular_speed
 var color setget set_color
 var attraction = 0.998

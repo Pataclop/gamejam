@@ -44,6 +44,8 @@ func stepForward(gameSpeed:float):
 		clickSpeed=clickSpeed*1.02
 	else :
 		clickSpeed = clickSpeed*0.90
+	if clickSpeed>10*baseAngularSpeed :
+		clickSpeed=10*baseAngularSpeed
 	var delta = speed * gameSpeed
 	if typeof(target) == 17:
 		if clockwise:
