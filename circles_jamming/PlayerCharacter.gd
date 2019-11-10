@@ -21,6 +21,7 @@ var speed = baseAngularSpeed
 const selectedColor = Color(0.1, 0.1, 0.1)
 
 signal targetChanged
+signal playerHit
 
 
 func hasATarget()->bool:
@@ -116,5 +117,4 @@ func _on_Target_is_clicked(elementClicked, isClockwise):
 		#print(t)
 
 func _on_PlayerCharacter_area_entered(area):
-	#print(self.get_parent())
-	pass # Replace with function body.
+	self.emit_signal("playerHit",self,area)

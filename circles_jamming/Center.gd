@@ -27,11 +27,12 @@ func _init():
 func _ready():
 	var s = get_node("Sprite")
 	s.position = position
+
+	$ParticleScript.position = position
 	
-	var ptcles = get_node("Particles2D_violettes")
-	ptcles.position = position
-	var ptcles2 = get_node("Particles2D_noires")
-	ptcles2.position = position
+	speedControler.registerMovingElement($ParticleScript)
+	speedControler.registerMovingElement($TimerScript)
+
 	
 
 	ballFactory = load("res://MovingObjectFactory.gd").new(position)
