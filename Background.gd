@@ -3,9 +3,10 @@ extends Node2D
 var radius1 = 150
 var radius2 = 30
 
+var pause_active = false
 
 func draw_circle_arc(center, radius, angle_from, angle_to, color):
-	var nb_points = 32
+	var nb_points = 64
 	var points_arc = PoolVector2Array()
 	
 	for i in range(nb_points + 1):
@@ -34,10 +35,21 @@ func _draw():
 func _ready():
 	pass # Replace with function body.
 
+
+func _input(event):
+	
+	if (event.is_action_pressed("ui_pause")):
+		pause_active = not pause_active
+		#print("Pause : ", pause_active)
+		
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	radius1=radius1*1.005
-	radius2=radius2*1.005
+	
+
+	if(not pause_active):
+		radius1=radius1*1.005
+		radius2=radius2*1.005
 
 	if radius1>820:
 		radius1 = 30
