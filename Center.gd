@@ -10,8 +10,10 @@ var speedControler#:GameSpeedControler
 var ballFactory
 var collectiblesFactory
 var collectiblesCount = 0
-
 var doesPlayerTargetNeedToBeDeleted = false
+var baseScale
+var pulseUp = true
+var pulseRatio = 1.005
 
 	
 #TEST ENUM
@@ -27,6 +29,7 @@ func _init():
 func _ready():
 	var s = get_node("Sprite")
 	s.position = position
+	baseScale = s.scale
 
 	$ParticleScript.position = position
 	
@@ -42,8 +45,14 @@ func _ready():
 	player.connect("targetChanged",self,"_on_Player_target_change")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func _process(delta):
+	if speedControler.gameSpeed != 0.0:
+		if pulseUp:
+			var centerSprite = get_node("Sprite")
+			centerSprite.scale = centerSprite.scale*pulseRatio*speedControler.gameSpeed
+		else:
+			var centerSprite = get_node("Sprite")
+			centerSprite.scale = centerSprite.scale/pulseRatio*speedControler.gameSpeed
 
 
 func get_variant():
@@ -81,6 +90,7 @@ func build_ball(new_ball):
 	
 
 func _on_Timer_timeout():	
+	pulseUp = !pulseUp
 	collectiblesCount += 1
 	if collectiblesCount % 4 ==0:
 		var new_collectible = collectiblesFactory.get_random()
