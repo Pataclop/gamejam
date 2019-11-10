@@ -3,17 +3,24 @@ extends MovingElement
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
+
+class_name Ball
+
 var direction
 
 
-var speed = 0.4
+var speed = 0
 var angular_speed
 var color setget set_color
-var attraction = 0.998
+var attraction = 1
 
 signal is_clicked
 
 const selectedColor = Color(0.1, 0.1, 0.1)
+
+const distOfRatio1 = 300
+
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -22,11 +29,16 @@ func _ready():
 	#apply_variant(anchor_variant)# TODO typage de l'ancre
 	
 
+func is_type(type): return type == "Ball" or .is_type(type)
 
 func stepForward(gameSpeed:float):
 	position = position + Vector2(cos(direction)*gameSpeed*speed, sin(direction)*gameSpeed*speed)
 	if angular_speed != null:
 		self.rotate(angular_speed * gameSpeed)
+	var distFromCenter = position.length()
+	var scalarScale = max(0.15 , 0.5 * distFromCenter / distOfRatio1)
+	self.scale = Vector2(scalarScale,scalarScale)
+	
 	
 	
 func reset_color():

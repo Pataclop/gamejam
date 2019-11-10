@@ -1,7 +1,9 @@
-extends Node2D
+extends MovingElement
 
 var radius1 = 150
 var radius2 = 30
+
+const baseExpansionSpeed = 1.003
 
 var pause_active = false
 
@@ -44,12 +46,13 @@ func _input(event):
 		
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	
 
+func stepForward(gameSpeed:float):
+	var expansionSpeed = 1-((1-baseExpansionSpeed) * gameSpeed)
+	
 	if(not pause_active):
-		radius1=radius1*1.005
-		radius2=radius2*1.005
+		radius1=radius1*expansionSpeed
+		radius2=radius2*expansionSpeed
 
 	if radius1>820:
 		radius1 = 30

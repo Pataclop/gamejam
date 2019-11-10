@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "MovingElement",
+"class": "Ball",
+"language": "GDScript",
+"path": "res://Ball.gd"
+}, {
 "base": "Node",
 "class": "GameSpeedControler",
 "language": "GDScript",
@@ -30,6 +35,7 @@ _global_script_classes=[ {
 "path": "res://TimerScript.gd"
 } ]
 _global_script_class_icons={
+"Ball": "",
 "GameSpeedControler": "",
 "MovingElement": "",
 "ParticleScript": "",
@@ -46,6 +52,7 @@ config/icon="res://assets/atom.png"
 
 window/size/width=960
 window/size/height=960
+window/size/resizable=false
 
 [importer_defaults]
 

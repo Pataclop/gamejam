@@ -15,11 +15,7 @@ var baseScale
 var pulseUp = true
 var pulseRatio = 1.005
 
-	
-#TEST ENUM
-enum anchor_variants {RED, GREEN, BLUE}
 
-	
 
 #constructor
 func _init():
@@ -50,41 +46,10 @@ func _process(delta):
 		else:
 			var centerSprite = get_node("Sprite")
 			centerSprite.scale = centerSprite.scale/pulseRatio*speedControler.gameSpeed
+	
 
 
-func get_variant():
-	var amount_variants = len(anchor_variants)
-	return rng.randi_range(0, amount_variants-1)
 
-
-func build_ball(new_ball):
-	
-	var anchor_variant = get_variant()
-	
-	new_ball.anchor_variant = anchor_variant
-	new_ball.position = position
-	new_ball.direction = rng.randf_range(0.0, 6.3)
-	new_ball.angular_speed = (rng.randf()-0.5)/5
-	
-	if(anchor_variant == anchor_variants.RED):
-		new_ball.color = Color(1, 0, 0)
-		pass
-		
-	if(anchor_variant == anchor_variants.GREEN):
-		new_ball.color = Color(0, 1, 0)
-		pass
-		
-	if(anchor_variant == anchor_variants.BLUE):
-		new_ball.color = Color(0, 0, 1)
-		pass
-		
-	else:
-		pass
-	
-	new_ball.modulate = new_ball.color
-	
-	return new_ball
-	
 
 func _on_Timer_timeout():	
 	pulseUp = !pulseUp

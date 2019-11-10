@@ -9,6 +9,8 @@ class_name MovingElement
 func _ready():
 	pass # Replace with function body.
 
+func is_type(type): return type == "MovingElement" or type == "Node2D"
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass

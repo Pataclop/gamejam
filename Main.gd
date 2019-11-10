@@ -31,6 +31,7 @@ func _ready():
 	$External_barrier.connect("collide", center, "_on_External_barrier_collide")
 	
 	
+	speedControler.registerMovingElement($Background)
 	
 	
 	
@@ -64,13 +65,16 @@ func _input(event):
 
 func _on_Player_playerHit(player,area):
 	if(area == $External_barrier):
-		print("barriere")
-	#elif(area.get_type() == load("res://Ball.tscn")):
-	#	var ball = area
-	#	print("ball ",ball)
-	else:
-		print("element inconnu")
+		print("Hit the barrier")
+		isGameOver = true
+	elif(area.is_type("Collectible")):
+		print("Picked up a collectible")
+	elif(area.is_type("Ball")):
+		print("Hit a ball")
 		area.change_color(Color(255,255,255))
-	isGameOver = true
+		isGameOver = true
+	else:
+		print("Hit an unknown element")
+	
 
 
