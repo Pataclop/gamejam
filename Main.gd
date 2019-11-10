@@ -8,12 +8,81 @@ var speedControler
 var isGameOver:bool = false
 var gameOverSpeedMultiplier = 1
 var background_rotation = 0.001
+var started
+var ui
+var ui_hidden
+var old_gameSpeed
+
+func _ready():	
+	started = false
+	ui = get_node("UI")
+	
+	
+	
+	
+	
+	
+	
+func _process(delta):
+	if started:
+		get_node("background").rotate(background_rotation)
+		
+		
+		if(isGameOver):
+			background_rotation *= 0.95
+			gameOverSpeedMultiplier *= 0.995
+			speedControler.gameSpeed *= gameOverSpeedMultiplier
+		
+		
+		speedControler.step()
+	
+	
+	
+	
+func _input(event):
+	
+	
+	if (event.is_action_released("ui_cancel")):
+		if ui_hidden:
+			old_gameSpeed = speedControler.gameSpeed
+			speedControler.gameSpeed = 0.0
+			ui.show()
+		else:
+			ui.hide()
+			speedControler.gameSpeed = old_gameSpeed
+		ui_hidden = !ui_hidden
+
+func _on_Player_playerHit(player,area):
+	if(area == $External_barrier):
+		print("Hit the barrier")
+		isGameOver = true
+	elif(area.is_type("Collectible")):
+		print("Picked up a collectible")
+	elif(area.is_type("Ball")):
+		print("Hit a ball")
+		area.change_color(Color(255,255,255))
+		isGameOver = true
+	else:
+		print("Hit an unknown element")
+	
 
 
-func _ready():
+
+
+func _on_Button_pressed():
+	get_tree().quit()
+
+
+func _on_Button3_pressed():
+	get_tree().reload_current_scene()
+	_on_Button2_pressed()
+
+
+func _on_Button2_pressed():
+	ui.hide()
+	ui_hidden = true
+	started = true
 	var windowSize = get_viewport().get_visible_rect().size
-	
-	
 	player = load("res://PlayerCharacter.tscn").instance()
 	player.position = Vector2(windowSize.x/8,windowSize.x/2)
 	add_child(player)
@@ -32,49 +101,3 @@ func _ready():
 	
 	
 	speedControler.registerMovingElement($Background)
-	
-	
-	
-	
-	
-func _process(delta):
-	
-	
-	get_node("background").rotate(background_rotation)
-	
-	
-	if(isGameOver):
-		background_rotation *= 0.95
-		gameOverSpeedMultiplier *= 0.995
-		speedControler.gameSpeed *= gameOverSpeedMultiplier
-	
-	
-	speedControler.step()
-	
-	
-	
-	
-func _input(event):
-	
-	if (event.is_action_pressed("ui_restart")):
-		get_tree().reload_current_scene()
-	
-	
-	if (event.is_action_released("ui_cancel")):
-		get_tree().quit()
-
-func _on_Player_playerHit(player,area):
-	if(area == $External_barrier):
-		print("Hit the barrier")
-		isGameOver = true
-	elif(area.is_type("Collectible")):
-		print("Picked up a collectible")
-	elif(area.is_type("Ball")):
-		print("Hit a ball")
-		area.change_color(Color(255,255,255))
-		isGameOver = true
-	else:
-		print("Hit an unknown element")
-	
-
-

@@ -5,9 +5,10 @@ class_name TimerScript
 # var a = 2
 # var b = "text"
 var time = 1
+var isPaused
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
+	isPaused = false
 	
 func start(time):
 	self.time = time
@@ -20,8 +21,10 @@ func stepForward(gameSpeed:float):
 	pass
 	if(gameSpeed==0):
 		$Timer.stop()
+		isPaused = true
 	else:
 		# //TODO : control time left as well.
-		if($Timer.paused):
+		if(isPaused):
 			$Timer.start(time)
+			isPaused = false
 		$Timer.set_wait_time( time/gameSpeed )

@@ -10,6 +10,7 @@ load_path = "res://.import/atom.png-a72458642c27d515e082de37693d62f7.stex"
 radius = 24.0525
 
 [node name="PlayerCharacter" type="Area2D"]
+z_index = -2
 script = ExtResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
