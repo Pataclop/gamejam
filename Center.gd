@@ -40,12 +40,13 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if speedControler.gameSpeed != 0.0:
+		var ratio = 1-((1-pulseRatio)*speedControler.gameSpeed)
 		if pulseUp:
 			var centerSprite = get_node("Sprite")
-			centerSprite.scale = centerSprite.scale*pulseRatio*speedControler.gameSpeed
+			centerSprite.scale = centerSprite.scale*ratio
 		else:
 			var centerSprite = get_node("Sprite")
-			centerSprite.scale = centerSprite.scale/pulseRatio*speedControler.gameSpeed
+			centerSprite.scale = centerSprite.scale/ratio
 	
 
 

@@ -15,7 +15,7 @@ func _ready():
 	
 	
 	player = load("res://PlayerCharacter.tscn").instance()
-	player.position = windowSize/4
+	player.position = Vector2(windowSize.x/8,windowSize.x/2)
 	add_child(player)
 	player.connect("playerHit",self,"_on_Player_playerHit")
 	

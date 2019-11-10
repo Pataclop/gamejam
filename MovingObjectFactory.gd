@@ -48,7 +48,7 @@ func getNormalAnchor():
 func getHeavyAnchor():
 	var ball = getNormalAnchor()
 	ball.speed = 0.3
-	ball.attraction = 0.990
+	ball.attraction = 0.992
 	
 	ball.color = Color(1, 0, 0)
 	ball.angular_speed /= 2
@@ -57,7 +57,7 @@ func getHeavyAnchor():
 func getAntiGravityAnchor():
 	var ball = getNormalAnchor()
 	ball.speed = 0.4
-	ball.attraction = 1.005
+	ball.attraction = 1.003
 	
 	ball.color = Color(0, 1, 0)
 	ball.angular_speed *= 2

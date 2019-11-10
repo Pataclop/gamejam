@@ -5,6 +5,7 @@ extends MovingElement
 # var b = "text"
 var isClicked = false
 var target = null
+const startingSpeed = 0.7
 
 var t
 var length
@@ -44,22 +45,26 @@ func _ready():
 	
 
 func stepForward(gameSpeed:float):
-	speed = baseAngularSpeed+clickSpeed
-	if isClicked :
-		clickSpeed=clickSpeed*1.02
-	else :
-		clickSpeed = clickSpeed*0.90
-	if clickSpeed>10*baseAngularSpeed :
-		clickSpeed=10*baseAngularSpeed
-	var delta = speed * gameSpeed
-	if hasATarget():
-		if clockwise:
-			t = t + delta 
-		else:
-			t = t - delta 
-		length=length*(1-(1-target.get_ref().attraction)*gameSpeed)
-		
-		position = Vector2(cos(t) *  length, sin(t)*length) + target.get_ref().global_position
+	if(target==null):
+		position -= position.direction_to(Vector2(0,0)) * startingSpeed * gameSpeed
+		pass
+	else:
+		speed = baseAngularSpeed+clickSpeed
+		if isClicked :
+			clickSpeed=clickSpeed*1.02
+		else :
+			clickSpeed = clickSpeed*0.90
+		if clickSpeed>10*baseAngularSpeed :
+			clickSpeed=10*baseAngularSpeed
+		var delta = speed * gameSpeed
+		if hasATarget():
+			if clockwise:
+				t = t + delta 
+			else:
+				t = t - delta 
+			length=length*(1-(1-target.get_ref().attraction)*gameSpeed)
+			
+			position = Vector2(cos(t) *  length, sin(t)*length) + target.get_ref().global_position
 		
 	var sprite = get_node("Sprite")
 	update()
