@@ -1,54 +1,57 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Main.gd" type="Script" id=1]
 [ext_resource path="res://Ball.tscn" type="PackedScene" id=2]
-[ext_resource path="res://assets/BG_smooth.png" type="Texture" id=3]
-[ext_resource path="res://assets/darkCenter.png" type="Texture" id=4]
-[ext_resource path="res://External_barrier.gd" type="Script" id=5]
-[ext_resource path="res://Background.tscn" type="PackedScene" id=6]
-[ext_resource path="res://assets/Xolonium-Regular.ttf" type="DynamicFontData" id=7]
+[ext_resource path="res://Score.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/BG_smooth.png" type="Texture" id=4]
+[ext_resource path="res://assets/darkCenter.png" type="Texture" id=5]
+[ext_resource path="res://External_barrier.gd" type="Script" id=6]
+[ext_resource path="res://Background.tscn" type="PackedScene" id=7]
+[ext_resource path="res://assets/Xolonium-Regular.ttf" type="DynamicFontData" id=8]
 
 [sub_resource type="DynamicFont" id=1]
 size = 64
-font_data = ExtResource( 7 )
+font_data = ExtResource( 8 )
 
 [sub_resource type="DynamicFont" id=2]
-font_data = ExtResource( 7 )
+font_data = ExtResource( 8 )
 
 [sub_resource type="DynamicFont" id=3]
-font_data = ExtResource( 7 )
+font_data = ExtResource( 8 )
 
 [sub_resource type="DynamicFont" id=4]
-font_data = ExtResource( 7 )
+font_data = ExtResource( 8 )
 
 [sub_resource type="DynamicFont" id=5]
-font_data = ExtResource( 7 )
+font_data = ExtResource( 8 )
 
 [node name="Main" type="Node"]
 script = ExtResource( 1 )
 Ball = ExtResource( 2 )
+
+[node name="HUD" parent="." instance=ExtResource( 3 )]
 
 [node name="background" type="Sprite" parent="."]
 modulate = Color( 1, 1, 1, 0.333333 )
 position = Vector2( 480, 480 )
 scale = Vector2( 0.8, 0.8 )
 z_index = -7
-texture = ExtResource( 3 )
+texture = ExtResource( 4 )
 
 [node name="black_blur" type="Sprite" parent="."]
 position = Vector2( 480, 480 )
 scale = Vector2( 0.3, 0.3 )
 z_index = -6
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
 
 [node name="External_barrier" type="Area2D" parent="."]
-script = ExtResource( 5 )
+script = ExtResource( 6 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="External_barrier"]
 build_mode = 1
 polygon = PoolVector2Array( 230, -70, 1030, -70, 1050, 1050, -130, 1070, -110, -30, -90, -40, -40, -40, -40, 1010, 1000, 1000, 1000, -30, -30, -40, -100, -40, -120, -60, -90, -70 )
 
-[node name="Background" parent="." instance=ExtResource( 6 )]
+[node name="Background" parent="." instance=ExtResource( 7 )]
 z_index = -5
 
 [node name="UI" type="Control" parent="."]

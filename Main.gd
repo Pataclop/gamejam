@@ -12,7 +12,7 @@ var started
 var ui
 var ui_hidden
 var old_gameSpeed
-
+var score = 0
 func _ready():	
 	started = false
 	ui = get_node("UI")
@@ -24,7 +24,10 @@ func _ready():
 	
 	
 func _process(delta):
+	
 	if started:
+		$HUD.update_score(score)
+
 		get_node("background").rotate(background_rotation)
 		
 		
@@ -58,6 +61,7 @@ func _on_Player_playerHit(player,area):
 		isGameOver = true
 	elif(area.is_type("Collectible")):
 		print("Picked up a collectible")
+		score+=1
 	elif(area.is_type("Ball")):
 		print("Hit a ball")
 		area.change_color(Color(255,255,255))
