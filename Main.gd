@@ -11,17 +11,18 @@ var speed_rotation = 0.001
 
 
 func _ready():
+	var windowSize = get_viewport().get_visible_rect().size
+	
 	player = load("res://PlayerCharacter.tscn").instance()
-	player.position = Vector2(0.05, 0.25) * OS.window_size
+	player.position = windowSize/4
 	add_child(player)
 	player.connect("playerHit",self,"_on_Player_playerHit")
 	
 	speedControler = load("res://GameSpeedControler.gd").new()
 	speedControler.registerMovingElement(player)
 	
-	var pos = Vector2(0.25, 0.25)
 	var center = preload("res://Center.tscn").instance()
-	center.position = pos * OS.window_size
+	center.position = windowSize/2
 	center.player = player
 	center.speedControler = speedControler
 	add_child(center)
@@ -68,7 +69,7 @@ func _on_Player_playerHit(player,area):
 	#	print("ball ",ball)
 	else:
 		print("element inconnu")
-		
+		area.change_color(Color(255,255,255))
 	isGameOver = true
 
 

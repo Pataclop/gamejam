@@ -39,7 +39,7 @@ func getNormalAnchor():
 	ball.position = spawnPos
 	ball.direction = rng.randf_range(0.0, 6.3)
 	ball.speed = 0.35
-	ball.attraction = 1.0
+	ball.attraction = 0.997
 	# aesthetic
 	ball.color = Color(0, 0, 1)
 	ball.angular_speed = (rng.randf()-0.5)/5 

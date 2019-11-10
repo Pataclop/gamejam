@@ -7,7 +7,7 @@
 load_path = "res://.import/atom.png-a72458642c27d515e082de37693d62f7.stex"
 
 [sub_resource type="CircleShape2D" id=2]
-radius = 40.0
+radius = 24.0525
 
 [node name="PlayerCharacter" type="Area2D"]
 script = ExtResource( 1 )
@@ -18,7 +18,6 @@ z_index = 1
 texture = SubResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 shape = SubResource( 2 )
 
 [node name="Trail" parent="." instance=ExtResource( 2 )]

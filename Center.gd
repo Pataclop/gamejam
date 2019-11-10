@@ -28,18 +28,15 @@ func _init():
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	var s = get_node("Sprite")
-	s.position = position
 	baseScale = s.scale
-
-	$ParticleScript.position = position
 	
 	speedControler.registerMovingElement($ParticleScript)
 	speedControler.registerMovingElement($TimerScript)
 
 	
 
-	ballFactory = load("res://MovingObjectFactory.gd").new(position)
-	collectiblesFactory = load("res://CollectibleFactory.gd").new(position)
+	ballFactory = load("res://MovingObjectFactory.gd").new(Vector2(0,0))
+	collectiblesFactory = load("res://CollectibleFactory.gd").new(Vector2(0,0))
 	
 	
 	player.connect("targetChanged",self,"_on_Player_target_change")

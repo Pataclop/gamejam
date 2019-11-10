@@ -30,10 +30,10 @@ func hasATarget()->bool:
 func _draw():
 	if(hasATarget()):
 		var targetPosInLocal = to_local(target.get_ref().to_global(Vector2(0,0)))
-		var dist = (targetPosInLocal-position).length()
+		var dist = (targetPosInLocal).length()
 		#print(dist)
 		var thickness = clamp(2000/dist,0.5,20)
-		draw_line(position, targetPosInLocal, Color(1, 0, 0, 0.4), thickness)
+		draw_line(Vector2(0,0), targetPosInLocal, Color(1, 0, 0, 0.4), thickness)
 	pass
 
 func _ready():
@@ -58,11 +58,10 @@ func stepForward(gameSpeed:float):
 		else:
 			t = t - delta 
 		length=length*(1-(1-target.get_ref().attraction)*gameSpeed)
-		var pos = target.get_ref().position - target.get_ref().dist_to_center/2#//TODO wtf ???
-		position = Vector2(pos[0]+cos(t) *  length, pos[1]+sin(t)*length)
+		
+		position = Vector2(cos(t) *  length, sin(t)*length) + target.get_ref().global_position
 		
 	var sprite = get_node("Sprite")
-	sprite.position = position
 	update()
 	
 	
@@ -106,9 +105,17 @@ func _on_Target_is_clicked(elementClicked, isClockwise):
 		target = weakref(elementClicked)
 		
 		target.get_ref().change_color(selectedColor)
-		var pos = target.get_ref().position - target.get_ref().dist_to_center/2
-		length = sqrt(pow((pos[0] - position[0]),2) + pow((pos[1]-position[1]),2))
-		t = atan2(pos[1]-position[1], pos[0] - position[0]) + PI
+		#var pos = target.get_ref().position - target.get_ref().dist_to_center/2
+		#length = sqrt(pow((pos[0] - position[0]),2) + pow((pos[1]-position[1]),2))
+		#t = atan2(pos[1]-position[1], pos[0] - position[0]) + PI
+		
+		print("tgt pos  ",target.get_ref().position)
+		print("pos ",self.position)
+		var vectToTarget:Vector2 = target.get_ref().global_position - self.global_position
+		length = vectToTarget.length()
+		print("length ",length)
+		t = atan2(-vectToTarget.y,-vectToTarget.x)
+		
 		
 		if(oldTarget == null):
 			emit_signal("targetChanged", null, target.get_ref())

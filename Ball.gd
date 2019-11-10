@@ -4,8 +4,6 @@ extends MovingElement
 # var a = 2
 # var b = "text"
 var direction
-var dist_to_center
-var centerPos
 
 
 var speed = 0.4
@@ -19,8 +17,7 @@ const selectedColor = Color(0.1, 0.1, 0.1)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	centerPos = position
-
+	pass
 
 	#apply_variant(anchor_variant)# TODO typage de l'ancre
 	
@@ -28,7 +25,6 @@ func _ready():
 
 func stepForward(gameSpeed:float):
 	position = position + Vector2(cos(direction)*gameSpeed*speed, sin(direction)*gameSpeed*speed)
-	dist_to_center = position-centerPos
 	if angular_speed != null:
 		self.rotate(angular_speed * gameSpeed)
 	
