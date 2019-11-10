@@ -7,6 +7,7 @@ var point
 var pos = Vector2(0.25, 0.25)
 var center = pos * OS.window_size
 var trailLength = 100
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -15,7 +16,7 @@ func _ready():
 func _process(delta):
 	point=global_position
 	
-	#print (point)
+	print (point)
 	add_point(point)
 	var cmp = get_point_count ()
 	for x in range (cmp):

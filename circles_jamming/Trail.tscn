@@ -13,4 +13,5 @@ z_index = -1
 points = PoolVector2Array( 275.138, 15.8448 )
 width = 17.0
 gradient = SubResource( 1 )
+texture_mode = 0
 script = ExtResource( 1 )
