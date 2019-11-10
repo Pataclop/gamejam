@@ -8,6 +8,9 @@ var pos = Vector2(0.25, 0.25)
 var center = pos * OS.window_size
 var trailLength = 100
 
+var init_counter = 0
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -16,13 +19,21 @@ func _ready():
 func _process(delta):
 	point=global_position
 	
-	print (point)
+
 	add_point(point)
+	init_counter = init_counter + 1
+	print(init_counter)
+		
+		
+		
+	
 	var cmp = get_point_count ()
+	
 	for x in range (cmp):
 		var pos=get_point_position (x)
 		#if (pos[0]<-100 or pos[0]>2000 or pos[1]<-100 or pos[1]>2000):
 		#	remove_point(x)
+		
 		set_point_position (x,pos+((pos-center)/1000))
 		
 

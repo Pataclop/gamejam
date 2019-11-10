@@ -89,9 +89,6 @@ func _on_Target_is_clicked(elementClicked, isClockwise):
 		if( hasATarget() && target.get_ref() == elementClicked):
 			return
 	
-
-	
-	
 		if(hasATarget()):
 			
 			if( ! doUseRightClic):
@@ -113,9 +110,9 @@ func _on_Target_is_clicked(elementClicked, isClockwise):
 		t = atan2(pos[1]-position[1], pos[0] - position[0]) + PI
 		
 		if(oldTarget == null):
-			emit_signal("targetChanged",null,target.get_ref())
+			emit_signal("targetChanged", null, target.get_ref())
 		else:
-			emit_signal("targetChanged",oldTarget.get_ref(),target.get_ref())
+			emit_signal("targetChanged", oldTarget.get_ref(), target.get_ref())
 		#print(t)
 
 func _on_PlayerCharacter_area_entered(area):
