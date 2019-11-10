@@ -7,7 +7,7 @@ var speedControler
 
 var isGameOver:bool = false
 var gameOverSpeedMultiplier = 1
-
+var speed_rotation = 0.001
 
 
 func _ready():
@@ -36,7 +36,12 @@ func _ready():
 	
 func _process(delta):
 	
+	
+	get_node("background").rotate(speed_rotation)
+	
+	
 	if(isGameOver):
+		speed_rotation *= 0.95
 		gameOverSpeedMultiplier *= 0.995
 		speedControler.gameSpeed *= gameOverSpeedMultiplier
 	
@@ -47,6 +52,10 @@ func _process(delta):
 	
 	
 func _input(event):
+	
+	if (event.is_action_pressed("ui_restart")):
+		get_tree().reload_current_scene()
+	
 	
 	if (event.is_action_released("ui_cancel")):
 		get_tree().quit()
