@@ -4,6 +4,7 @@ export (PackedScene) var Ball
 
 var player
 var speedControler
+var center
 
 var isGameOver:bool = false
 var gameOverSpeedMultiplier = 1
@@ -58,6 +59,8 @@ func _input(event):
 		ui_hidden = !ui_hidden
 
 func _on_Player_playerHit(player,area):
+	if(isGameOver):
+		return
 	if(area == $External_barrier):
 		print("Hit the barrier")
 		isGameOver = true
@@ -73,40 +76,55 @@ func _on_Player_playerHit(player,area):
 		print("Hit an unknown element")
 	
 
-
-
-
-func _on_Button_pressed():
-	get_tree().quit()
-
-
-func _on_Button3_pressed():
-	get_tree().reload_current_scene()
-	_on_Button2_pressed()
-
-
-func _on_Button2_pressed():
-	get_node("UI/StartPanel/VBoxContainer/HBoxContainer/Button3").show()
-	get_node("UI/StartPanel/VBoxContainer/HBoxContainer/Button2").hide()
-	ui.hide()
-	ui_hidden = true
-	started = true
+func initialize_childs():
 	var windowSize = get_viewport().get_visible_rect().size
-	player = load("res://PlayerCharacter.tscn").instance()
 	player.position = Vector2(windowSize.x/8,windowSize.x/2)
+	center.position = windowSize/2
+	speedControler.gameSpeed = 1.0
+
+
+func create_childs():
+	pass
+	player = load("res://PlayerCharacter.tscn").instance()
 	add_child(player)
 	player.connect("playerHit",self,"_on_Player_playerHit")
 	
 	speedControler = load("res://GameSpeedControler.gd").new()
 	speedControler.registerMovingElement(player)
 	
-	var center = preload("res://Center.tscn").instance()
-	center.position = windowSize/2
+	center = preload("res://Center.tscn").instance()
 	center.player = player
 	center.speedControler = speedControler
 	add_child(center)
 	
 	$External_barrier.connect("collide", center, "_on_External_barrier_collide")
-	
-	
 	speedControler.registerMovingElement($Background)
+
+func clean_childs():
+	player.clean()
+	center.clean()
+	
+func _on_Button_pressed():
+	get_tree().quit()
+
+
+func _on_Button3_pressed():#restart
+	#get_tree().reload_current_scene()
+	clean_childs()
+	initialize_childs()
+	#_on_Button2_pressed()
+	ui.hide()
+	ui_hidden = true
+	started = true
+	isGameOver = false
+	gameOverSpeedMultiplier = 1
+
+
+func _on_Button2_pressed():#start
+	get_node("UI/StartPanel/VBoxContainer/HBoxContainer/Button3").show()
+	get_node("UI/StartPanel/VBoxContainer/HBoxContainer/Button2").hide()
+	ui.hide()
+	ui_hidden = true
+	started = true
+	create_childs()
+	initialize_childs()

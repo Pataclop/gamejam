@@ -3,7 +3,7 @@ extends Line2D
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
-var pos = Vector2(0.25, 0.25)
+var pos
 var trailLength = 100
 
 var init_counter = 0
@@ -42,3 +42,7 @@ func _process(delta):
 
 	while(get_point_count()>trailLength):
 		remove_point(0)
+
+func clean():
+	clear_points()
+	init_counter=0

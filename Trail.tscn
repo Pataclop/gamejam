@@ -14,5 +14,4 @@ points = PoolVector2Array( 275.138, 15.8448 )
 width = 17.0
 default_color = Color( 0.4, 0.501961, 1, 1 )
 gradient = SubResource( 1 )
-texture_mode = 0
 script = ExtResource( 1 )

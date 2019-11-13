@@ -41,15 +41,24 @@ func _ready():
 func _process(delta):
 	if speedControler.gameSpeed != 0.0:
 		var ratio = 1-((1-pulseRatio)*speedControler.gameSpeed)
+		var centerSprite = $Sprite
 		if pulseUp:
-			var centerSprite = get_node("Sprite")
 			centerSprite.scale = centerSprite.scale*ratio
 		else:
-			var centerSprite = get_node("Sprite")
 			centerSprite.scale = centerSprite.scale/ratio
 	
 
-
+func clean():
+	for child in get_children():
+		if(child == $Sprite or child == $ParticleScript or child == $TimerScript):
+			continue
+		#else it is a ball or collectible
+		child.queue_free()
+	collectiblesCount = 0
+	doesPlayerTargetNeedToBeDeleted = false
+	pulseUp = true
+	var centerSprite = $Sprite
+	centerSprite.scale = baseScale
 
 
 func _on_Timer_timeout():	

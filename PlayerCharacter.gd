@@ -24,7 +24,16 @@ const selectedColor = Color(0.1, 0.1, 0.1)
 signal targetChanged
 signal playerHit
 
-
+func clean():
+	isClicked = false
+	t = 0
+	length = 0
+	clockwise = true
+	target = null
+	timeSinceClicked = 0
+	clickSpeed = 0
+	$Trail.get_node("Trail").clean()
+	
 func hasATarget()->bool:
 	return target != null && target.get_ref()
 
