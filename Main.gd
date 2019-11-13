@@ -14,8 +14,10 @@ var ui_hidden
 var old_gameSpeed
 var score = 0
 func _ready():	
+	get_node("UI/StartPanel/VBoxContainer/HBoxContainer/Button3").hide()
 	started = false
 	ui = get_node("UI")
+	
 	
 	
 	
@@ -60,6 +62,7 @@ func _on_Player_playerHit(player,area):
 		print("Hit the barrier")
 		isGameOver = true
 	elif(area.is_type("Collectible")):
+		area.queue_free()
 		print("Picked up a collectible")
 		score+=1
 	elif(area.is_type("Ball")):
@@ -83,6 +86,8 @@ func _on_Button3_pressed():
 
 
 func _on_Button2_pressed():
+	get_node("UI/StartPanel/VBoxContainer/HBoxContainer/Button3").show()
+	get_node("UI/StartPanel/VBoxContainer/HBoxContainer/Button2").hide()
 	ui.hide()
 	ui_hidden = true
 	started = true
