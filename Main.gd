@@ -111,13 +111,14 @@ func _on_Button_pressed():
 func _on_Button3_pressed():#restart
 	#get_tree().reload_current_scene()
 	clean_childs()
-	initialize_childs()
 	#_on_Button2_pressed()
 	ui.hide()
 	ui_hidden = true
 	started = true
 	isGameOver = false
 	gameOverSpeedMultiplier = 1
+	score = 0
+	initialize_childs()
 
 
 func _on_Button2_pressed():#start
